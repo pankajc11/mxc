@@ -1,0 +1,14 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "windows_sandbox",
+  "containerId": "learn-wsb-folders",
+  "filesystem": {
+    "readonlyPaths": ["C:\\path\\to\\mxc\\learn\\04-windows-sandbox\\input"],
+    "readwritePaths": ["C:\\path\\to\\mxc\\learn\\04-windows-sandbox\\output"]
+  },
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"$in = 'C:\\path\\to\\mxc\\learn\\04-windows-sandbox\\input\\notes.txt'; $out = 'C:\\path\\to\\mxc\\learn\\04-windows-sandbox\\output\\summary.txt'; $lines = Get-Content $in; 'read ' + $lines.Count + ' lines from input'; ('Summary written inside ' + $env:COMPUTERNAME + ': ' + $lines.Count + ' lines') | Set-Content $out; 'wrote ' + $out; try { Add-Content $in 'tampered' -ErrorAction Stop; 'write to read-only input: ALLOWED' } catch { 'write to read-only input: BLOCKED' }\"",
+    "timeout": 300000
+  }
+}

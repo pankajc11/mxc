@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/stable/mxc-config.schema.1.0.0.json",
+  "version": "1.0.0",
+  "containment": "wslc",
+  "containerId": "learn-wslc-ping",
+  "process": {
+    "commandLine": "ping -c 3 1.1.1.1 | grep -E 'time=|round-trip'",
+    "timeout": 120000
+  },
+  "network": {
+    "egress": { "default": "allow" },
+    "ingress": { "default": "allow", "hostLoopback": "allow" }
+  },
+  "wslc": {
+    "image": "alpine:latest"
+  }
+}

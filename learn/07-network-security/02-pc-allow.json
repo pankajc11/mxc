@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schemas/stable/mxc-config.schema.1.0.0.json",
+  "version": "1.0.0",
+  "containment": "process",
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"'sandbox PID: ' + $PID; $c = New-Object Net.Sockets.TcpClient; $c.Connect('1.1.1.1', 443); 'connected 1.1.1.1:443 from local port ' + $c.Client.LocalEndPoint.Port + ' - holding 15 s'; Start-Sleep 15; $c.Close(); $h = New-Object Net.Sockets.TcpClient; try { if ($h.ConnectAsync('127.0.0.1', 18080).Wait(3000)) { 'host loopback :18080: CONNECTED' } else { 'host loopback :18080: timed out' } } catch { 'host loopback :18080: BLOCKED' } finally { $h.Close() }\"",
+    "cwd": "C:\\path\\to\\mxc\\learn\\07-network-security",
+    "timeout": 60000
+  },
+  "filesystem": {
+    "readonlyPaths": ["C:\\path\\to\\mxc\\learn\\07-network-security"]
+  },
+  "ui": { "disable": false },
+  "network": {
+    "egress": { "default": "allow" },
+    "ingress": { "default": "deny", "hostLoopback": "deny" }
+  }
+}

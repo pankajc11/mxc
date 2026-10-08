@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "microvm",
+  "filesystem": {
+    "readonlyPaths": ["C:\\path\\to\\mxc\\learn\\06-nanvix\\input"],
+    "readwritePaths": ["C:\\path\\to\\mxc\\learn\\06-nanvix\\work"]
+  },
+  "process": {
+    "commandLine": "import os, sys\nsrc = 'C:\\\\path\\\\to\\\\mxc\\\\learn\\\\06-nanvix\\\\input'\ndst = 'C:\\\\path\\\\to\\\\mxc\\\\learn\\\\06-nanvix\\\\work'\nprint('input is really at:', src)\nprint('work  is really at:', dst)\nnums = [int(x) for x in open(src + '/numbers.txt').read().split()]\nprint('read', len(nums), 'numbers, sum =', sum(nums))\nwith open(dst + '/result.txt', 'w') as f:\n    f.write('sum=%d count=%d\\n' % (sum(nums), len(nums)))\nprint('wrote result.txt')\ntry:\n    open(src + '/numbers.txt', 'a').write('999\\n')\n    print('write to read-only input: ALLOWED')\nexcept OSError as e:\n    print('write to read-only input: BLOCKED ->', e)\n",
+    "timeout": 30000
+  }
+}

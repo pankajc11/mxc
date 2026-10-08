@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "windows_sandbox",
+  "containerId": "learn-wsb-ping",
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"'--- 1. Firewall as MXC left it ---'; netsh advfirewall show currentprofile | Select-String 'Firewall Policy'; '--- 2. Ping google.com (expect failure) ---'; ping.exe -n 3 -w 2000 google.com; '--- 3. Re-open outbound traffic (guest user is admin) ---'; netsh advfirewall set allprofiles firewallpolicy blockinbound,allowoutbound; netsh advfirewall show currentprofile | Select-String 'Firewall Policy'; '--- 4. Ping google.com again ---'; ping.exe -n 4 google.com; 'Staying up 30s so you can look around...'; Start-Sleep 30\"",
+    "timeout": 300000
+  }
+}

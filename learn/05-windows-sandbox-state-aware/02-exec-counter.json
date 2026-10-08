@@ -1,0 +1,8 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"$f = Join-Path $env:USERPROFILE 'counter.txt'; $n = if (Test-Path $f) { [int](Get-Content $f) + 1 } else { 1 }; Set-Content $f $n; $os = Get-CimInstance Win32_OperatingSystem; 'exec #{0} | computer {1} | booted {2}' -f $n, $env:COMPUTERNAME, $os.LastBootUpTime; Add-Content 'C:\\path\\to\\mxc\\learn\\05-windows-sandbox-state-aware\\work\\log.txt' ('exec #{0} at {1} on {2}' -f $n, (Get-Date -Format HH:mm:ss), $env:COMPUTERNAME)\"",
+    "timeout": 60000
+  }
+}

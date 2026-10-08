@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "microvm",
+  "filesystem": {
+    "readwritePaths": ["C:\\path\\to\\mxc\\learn\\06-nanvix\\work"]
+  },
+  "process": {
+    "commandLine": "import time\ndst = 'C:\\\\path\\\\to\\\\mxc\\\\learn\\\\06-nanvix\\\\work'\nopen(dst + '/partial.txt', 'w').write('half-finished work\\n')\nprint('wrote partial.txt, now sleeping past the timeout...', flush=True)\ntime.sleep(120)\nprint('never reached')\n",
+    "timeout": 3000
+  }
+}

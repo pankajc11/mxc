@@ -1,0 +1,19 @@
+{
+  "$schema": "../../schemas/stable/mxc-config.schema.1.0.0.json",
+  "version": "1.0.0",
+  "containment": "process",
+  "process": {
+    "commandLine": "cmd /c echo Hello from MXC without Node.js & echo GREETING=%GREETING% & echo cwd=%CD% & dir /b \"%USERPROFILE%\\Documents\"",
+    "cwd": "C:\\path\\to\\mxc\\learn\\01-process-container\\work",
+    "env": ["GREETING=hi-from-json"],
+    "inheritDefaultEnv": true,
+    "timeout": 30000
+  },
+  "filesystem": {
+    "readwritePaths": ["C:\\path\\to\\mxc\\learn\\01-process-container\\work"]
+  },
+  "network": {
+    "egress": { "default": "deny" },
+    "ingress": { "default": "deny", "hostLoopback": "deny" }
+  }
+}

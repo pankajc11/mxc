@@ -1,0 +1,8 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "windows_sandbox",
+  "filesystem": {
+    "readwritePaths": ["C:\\path\\to\\mxc\\learn\\05-windows-sandbox-state-aware\\work"]
+  }
+}

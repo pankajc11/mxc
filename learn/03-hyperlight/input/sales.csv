@@ -1,0 +1,6 @@
+region,product,units,price
+north,apples,120,0.50
+south,apples,80,0.55
+north,pears,40,0.90
+south,pears,95,0.85
+east,apples,60,0.52

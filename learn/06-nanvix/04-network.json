@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "microvm",
+  "network": {
+    "egress": { "default": "allow" },
+    "ingress": { "default": "allow", "hostLoopback": "allow" }
+  },
+  "process": {
+    "commandLine": "import socket, time\nfor host in ['1.1.1.1', 'google.com', 'microsoft.com']:\n    try:\n        ip = socket.gethostbyname(host)\n        t = time.time()\n        s = socket.create_connection((ip, 443), timeout=5)\n        print('%-14s -> %-15s TCP 443 connected in %.1f ms' % (host, ip, (time.time() - t) * 1000))\n        s.close()\n    except OSError as e:\n        print('%-14s -> failed: %s' % (host, e))\n",
+    "timeout": 30000
+  }
+}

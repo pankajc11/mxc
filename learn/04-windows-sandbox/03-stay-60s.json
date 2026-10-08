@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "windows_sandbox",
+  "containerId": "learn-wsb-stay-60s",
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"'Hello from Windows Sandbox'; 'computer : ' + $env:COMPUTERNAME; 'user     : ' + $env:USERNAME; 'Staying up for 60 seconds - look around!'; foreach ($i in 60..1) { if ($i % 10 -eq 0) { '{0} s left' -f $i }; Start-Sleep 1 }; 'Done, exiting'\"",
+    "timeout": 300000
+  }
+}

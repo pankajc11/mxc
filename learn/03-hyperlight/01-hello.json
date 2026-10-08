@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "hyperlight",
+  "containerId": "learn-hyperlight-hello",
+  "hyperlight": { "runtime": "python" },
+  "process": {
+    "timeout": 30000,
+    "commandLine": "import sys, os, platform, socket, time\nt = time.perf_counter()\nprint('Hello from a Hyperlight micro-VM')\nprint('python  :', sys.version.split()[0])\nprint('platform:', platform.system(), platform.release(), platform.machine())\nprint('cpus    :', os.cpu_count())\nprint('root fs :', sorted(os.listdir('/')))\ntry:\n    socket.create_connection(('1.1.1.1', 443), timeout=3)\n    print('network : reachable')\nexcept Exception as e:\n    print('network : blocked ->', type(e).__name__, e)\nprint('script took %.1f ms' % ((time.perf_counter() - t) * 1000))\nsys.exit(3)"
+  }
+}

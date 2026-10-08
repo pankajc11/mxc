@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "windows_sandbox",
+  "containerId": "learn-wsb-hello",
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"'Hello from Windows Sandbox'; 'computer : ' + $env:COMPUTERNAME; 'user     : ' + $env:USERNAME; 'os       : ' + (Get-CimInstance Win32_OperatingSystem).Caption; 'booted   : ' + (Get-CimInstance Win32_OperatingSystem).LastBootUpTime; 'network  : ' + $(try { (New-Object Net.Sockets.TcpClient).Connect('1.1.1.1', 443); 'reachable' } catch { 'blocked' }); exit 3\"",
+    "timeout": 300000
+  }
+}

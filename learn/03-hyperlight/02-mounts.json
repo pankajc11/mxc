@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/dev/mxc-config.schema.1.1.0-alpha.json",
+  "version": "1.1.0-alpha",
+  "containment": "hyperlight",
+  "containerId": "learn-hyperlight-mounts",
+  "hyperlight": { "runtime": "python" },
+  "filesystem": {
+    "readonlyPaths": ["C:\\path\\to\\mxc\\learn\\03-hyperlight\\input"],
+    "readwritePaths": ["C:\\path\\to\\mxc\\learn\\03-hyperlight\\output"]
+  },
+  "process": {
+    "timeout": 30000,
+    "commandLine": "import csv, os\nprint('mounted under /host:', sorted(os.listdir('/host')))\n\ntotals = {}\nwith open('/host/input/sales.csv') as f:\n    for row in csv.DictReader(f):\n        totals[row['product']] = totals.get(row['product'], 0) + int(row['units']) * float(row['price'])\n\nlines = ['%-8s %8.2f' % (p, v) for p, v in sorted(totals.items())]\nwith open('/host/output/report.txt', 'w') as f:\n    f.write('revenue by product\\n' + '\\n'.join(lines) + '\\n')\nprint('wrote /host/output/report.txt:')\nprint('\\n'.join(lines))\n\ntry:\n    open('/host/input/sales.csv', 'a').write('tampered\\n')\n    print('write to read-only input: ALLOWED (unexpected)')\nexcept OSError as e:\n    print('write to read-only input: BLOCKED ->', e)"
+  }
+}

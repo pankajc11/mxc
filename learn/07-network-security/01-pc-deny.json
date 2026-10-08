@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schemas/stable/mxc-config.schema.1.0.0.json",
+  "version": "1.0.0",
+  "containment": "process",
+  "process": {
+    "commandLine": "powershell -NoProfile -Command \"'sandbox PID: ' + $PID; function T($n, $h, $p) { $c = New-Object Net.Sockets.TcpClient; try { if ($c.ConnectAsync($h, $p).Wait(3000)) { $n + ': CONNECTED' } else { $n + ': timed out' } } catch { $n + ': BLOCKED -> ' + $_.Exception.InnerException.Message } finally { $c.Close() } }; T 'egress 1.1.1.1:443   ' '1.1.1.1' 443; T 'host loopback :18080' '127.0.0.1' 18080; $name = 'mxc-dns-probe-' + (Get-Random) + '.example.com'; 'dns probe name: ' + $name; try { [Net.Dns]::GetHostAddresses($name) | Out-Null; 'dns lookup: resolved' } catch { 'dns lookup: failed -> ' + $_.Exception.InnerException.Message }; try { [Net.Dns]::GetHostAddresses('www.microsoft.com') | Select-Object -First 1 | ForEach-Object { 'dns www.microsoft.com: ' + $_ } } catch { 'dns www.microsoft.com: failed -> ' + $_.Exception.InnerException.Message }\"",
+    "cwd": "C:\\path\\to\\mxc\\learn\\07-network-security",
+    "timeout": 60000
+  },
+  "filesystem": {
+    "readonlyPaths": ["C:\\path\\to\\mxc\\learn\\07-network-security"]
+  },
+  "ui": { "disable": false },
+  "network": {
+    "egress": { "default": "deny" },
+    "ingress": { "default": "deny", "hostLoopback": "deny" }
+  }
+}
